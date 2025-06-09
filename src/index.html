@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla App Template</title>
+    <title>Image Search App</title>
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
 
@@ -16,15 +16,17 @@
       </label>
       <button type="submit">Search</button>
     </form>
-    
+
     <p id="loading-message" hidden>Loading images, please wait...</p>
+  
+    <div class="loader-backdrop" id="loader">
+      <span class="loader hidden"></span>
+    </div>
 
     <ul class="gallery"></ul>
     </div>
     
-    <div class="loader-backdrop" id="loader">
-      <div class="loader"></div>
-    </div>
+   
     
       <script type="module" src="./main.js"></script>
   </body>

@@ -2,8 +2,10 @@ import { fetchImages } from './js/pixabay-api.js';
 import {
   createGalleryMarkup,
   hideLoader,
+  showLoader,
   lightbox,
 } from './js/render-functions.js';
+
 import './css/styles.css';
 
 import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -13,6 +15,8 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 const form = document.querySelector('form');
 const gallery = document.querySelector('.gallery');
+
+
 
 form.addEventListener('submit', async e => {
   e.preventDefault();
@@ -51,3 +55,4 @@ form.addEventListener('submit', async e => {
     hideLoader();
   }
 });
+

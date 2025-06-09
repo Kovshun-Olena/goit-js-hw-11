@@ -73,6 +73,28 @@
   background-color: #6c8cff;
 }
 
+.loader {
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin: 40px auto;
+  border: 5px solid #ccc;
+  border-top-color: #3478f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loader.hidden {
+  display: none;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
