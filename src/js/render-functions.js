@@ -43,3 +43,8 @@ export function hideLoader() {
 }
 
 export { lightbox };
+
+export function renderGallery(images) {
+  galleryContainer.innerHTML = createGallery(images);
+  lightbox.refresh();
+}

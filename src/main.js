@@ -5,6 +5,7 @@ import {
   showLoader,
   hideLoader,
   lightbox,
+  renderGallery,
 } from './js/render-functions.js';
 
 import './css/styles.css';
@@ -42,8 +43,7 @@ form.addEventListener('submit', e => {
         });
         return;
       }
-      gallery.innerHTML = createGallery(images);
-      lightbox.refresh();
+      renderGallery(images);
       form.reset();
     })
     .catch(error => {
