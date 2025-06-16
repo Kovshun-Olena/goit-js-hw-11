@@ -9,7 +9,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
 });
 
-export function createGalleryMarkup(images) {
+export function createGallery(images) {
   return images
     .map(
       ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => `

@@ -1,26 +1,22 @@
-import { fetchImages } from './js/pixabay-api.js';
+import { getImagesByQuery } from './js/pixabay-api.js';
 import {
-  createGalleryMarkup,
-  hideLoader,
+  createGallery,
+  clearGallery,
   showLoader,
+  hideLoader,
   lightbox,
 } from './js/render-functions.js';
 
 import './css/styles.css';
-
 import 'simplelightbox/dist/simple-lightbox.min.css';
-
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 const form = document.querySelector('form');
 const gallery = document.querySelector('.gallery');
 
-
-
-form.addEventListener('submit', async e => {
+form.addEventListener('submit', e => {
   e.preventDefault();
-
   const query = form.elements['search-text']?.value.trim();
 
   if (!query) {
@@ -32,27 +28,31 @@ form.addEventListener('submit', async e => {
     return;
   }
 
-  try {
-    const images = await fetchImages(query);
+  showLoader();
+  clearGallery();
 
-    if (images.length === 0) {
+  getImagesByQuery(query)
+    .then(images => {
+      hideLoader();
+      if (!images.length) {
+        iziToast.error({
+          title: 'Error',
+          message: 'Sorry, there are no images matching your search query. Please, try again!',
+          position: 'topRight',
+        });
+        return;
+      }
+      gallery.innerHTML = createGallery(images);
+      lightbox.refresh();
+      form.reset();
+    })
+    .catch(error => {
+      hideLoader();
       iziToast.error({
         title: 'Error',
-        message: 'Sorry, there are no images matching your search query. Please, try again!',
+        message: 'Failed to fetch images.',
         position: 'topRight',
       });
-      gallery.innerHTML = '';
-    }
-
-    gallery.innerHTML = createGalleryMarkup(images);
-
-    lightbox.refresh();
-    form.reset();
-    
-  } catch (error) {
-    console.error('Error fetching images:', error);
-  }finally {
-    hideLoader();
-  }
+      console.error('Error fetching images:', error);
+    });
 });
-
